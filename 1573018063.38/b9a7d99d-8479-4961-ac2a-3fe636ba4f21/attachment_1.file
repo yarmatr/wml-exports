@@ -1,0 +1,49 @@
+{
+  "doc_type": "pipeline",
+  "version": "2.0",
+  "pipelines": [{
+    "id": "26b91c42-4b41-49f4-98bb-f608e849cbb5",
+    "runtime_ref": "hybrid",
+    "nodes": [{
+      "outputs": [{
+        "id": "automl"
+      }],
+      "id": "automl",
+      "type": "execution_node",
+      "parameters": {
+        "stage_flag": true,
+        "output_logs": true,
+        "optimization": {
+          "learning_type": "regression",
+          "label": "height",
+          "max_num_daub_ensembles": 1.0,
+          "scorer_for_ranking": "neg_root_mean_squared_error",
+          "run_cognito_flag": true,
+          "holdout_param": 0.1
+        },
+        "output_model": {
+          "name": "automl",
+          "location": "/projects/57624371-3931-4744-8dc0-11c5d6927420/assets/auto_ml/5a5568f4-4c3a-40e0-9182-3c2f3d99e595/wml_data/95cb4f7e-81b0-4a51-b2c1-3d1771ffb427/data/automl/pre_hpo_d_output/Pipeline1/model.pickle"
+        }
+      },
+      "runtime_ref": "autoai",
+      "op": "wml-http-score"
+    }]
+  }],
+  "runtimes": [{
+    "id": "autoai",
+    "name": "auto_ai.kb",
+    "version": "v.0.1.282",
+    "app_data": {
+      "wml_data": {
+        "runtime_spec_v4": {
+          "compute": {
+            "name": "m",
+            "nodes": 1
+          }
+        }
+      }
+    }
+  }],
+  "primary_pipeline": "26b91c42-4b41-49f4-98bb-f608e849cbb5"
+}
